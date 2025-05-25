@@ -1,102 +1,119 @@
-# AI Medical Report Analyzer Assistant
+# AI Medical Report Analyzer Assistant (ID: 193445)
 
-## Hackathon Details
-- **Event:** AI Medical Report Analyzer Assistant Hackathon
-- **Dates:** May 24, 2025 - May 25, 2025 (1 day)
-- **Host:** Zunaib
-- **Category:** Artificial Intelligence and Data Science
+## Overview
 
-## Description
-The AI Medical Report Analyzer Assistant is an intelligent system designed to assist healthcare professionals and patients by automatically analyzing, summarizing, and interpreting medical reports. It leverages artificial intelligence and natural language processing (NLP) to extract key information from medical documents such as lab reports, radiology findings, pathology results, and discharge summaries, providing quick insights and enhancing clinical decision-making.
+**AI Medical Report Analyzer Assistant** is a Streamlit-based application that leverages OCR, NLP, and Generative AI to help users interpret medical lab reports (such as blood tests and lipid profiles) from images or scanned documents. The app extracts, structures, and explains test results in simple language, flags abnormal values, and provides downloadable summaries.
 
-## Problem Statement
-Medical lab reports—such as blood tests, lipid profiles, and diagnostic summaries—are often filled with technical jargon, abbreviations, and reference values that the average person cannot interpret without a doctor. Furthermore, reports come in various formats (PDFs, scans, images), making it even harder to access understandable information quickly.
+---
 
-## The Challenge
-Design and develop an AI-powered assistant that can:
-- Extract data (text, numbers, tables) from scanned medical reports or PDFs
-- Use NLP to analyze and structure the content
-- Apply Generative AI to explain test results in simple, human-understandable language
-- Optionally, suggest follow-up actions or flag values that are out of range
+## Features
 
-## Project Objectives
-1. **Input Handling**
-   - Allow users to upload medical report files in image format (JPEG/PNG) or scanned PDFs.
-   - Preprocess the input (denoising, binarization) using OpenCV to improve accuracy.
-2. **Text Extraction (OCR)**
-   - Use Tesseract or EasyOCR to extract content from reports.
-   - Extract structured data like:
-     - Test Name
-     - Measured Value
-     - Normal Range
-     - Unit (mg/dL, etc.)
-3. **NLP-based Structuring**
-   - Use rule-based or ML-based logic to:
-     - Map extracted rows into structured format (dictionary or table).
-     - Identify values outside the normal reference range.
-     - Categorize values (e.g., Critical, Borderline, Normal).
-4. **Generative AI Explanation**
-   - Use GPT-3.5 or Gemini Pro via API to explain each test result using a prompt like:
-     > “Explain in simple language what it means if the patient’s Hemoglobin is 9.5 g/dL, given the normal range is 13–17 g/dL.”
-   - Return explanations for each abnormal result or all if time allows.
-5. **Optional Risk Summary / Follow-up Suggestion**
-   - Based on extracted values and explanations, optionally generate:
-     - A summary paragraph
-     - A list of suggested actions like “Consult a cardiologist” or “Increase iron intake.”
-6. **User Interface**
-   - **Note:** This project uses a **Streamlit web interface** for all user interactions, including file upload, OCR result viewing, explanations, and downloadable summaries.
-   - There is **no Flask or CLI interface**.
+- **File Upload:** Supports uploading medical report images (PNG/JPG).
+- **Preprocessing:** Uses OpenCV to enhance image quality for better OCR accuracy.
+- **OCR Extraction:** Extracts text from images using Tesseract.
+- **NLP Structuring:** Structures extracted text into test name, value, unit, and normal range.
+- **Healthcare Dataset Integration:** Optionally uses a CSV dataset for richer test info and normal ranges.
+- **Out-of-Range Flagging:** Flags test values outside the normal range.
+- **Classification:** Categorizes results as low, normal, or high.
+- **AI Explanations:** Uses Google Gemini Pro to explain each test result in simple terms.
+- **Summary & Follow-up:** Generates a summary, risk assessment, and follow-up suggestions.
+- **PDF Download:** Allows users to download a PDF summary of results and explanations.
+- **Data Visualization:** Visualizes test values and normal ranges with interactive charts.
 
-## Project Structure
-```
-ai-assistant-medical-reports
-├── src
-│   ├── main.py
-│   ├── analysis
-│   │   └── analyzer.py
-│   ├── summarization
-│   │   └── summarizer.py
-│   ├── data
-│   │   └── __init__.py
-│   └── utils
-│       └── helpers.py
-├── requirements.txt
-├── .gitignore
-├── README.md
-└── tests
-    ├── test_analyzer.py
-    └── test_summarizer.py
-```
+---
+## 🎥 Demo Video
 
-## Setup Instructions
-1. **Clone the Repository**
-   ```bash
-   git clone <repository-url>
-   cd ai-assistant-medical-reports
+👉 [Click here to watch the demo](Demo.mp4)
+## How It Works
+
+1. **Upload** a medical report image (PNG/JPG).
+2. **Preprocessing** improves image quality for OCR.
+3. **OCR** extracts raw text from the image.
+4. **NLP** parses and structures the extracted data.
+5. **Flagging** highlights abnormal test results.
+6. **AI Explanations** provide easy-to-understand summaries for each test.
+7. **Download** a PDF summary or view interactive charts.
+
+---
+
+## Setup & Installation
+
+1. **Clone the repository:**
+   ```sh
+   git clone <(https://github.com/Shayan-Ahmed4848/AI_HACKATHON_AI_Medical_Report_Analyzer_PY-193445)>
+   cd AI-Hackathon-Python-Programming
    ```
 
-2. **Create a Virtual Environment**
-   ```bash
-   python -m venv venv
-   # On Windows use:
-   venv\Scripts\activate
-   # On macOS/Linux use:
-   source venv/bin/activate
-   ```
-
-3. **Install Dependencies**
-   ```bash
+2. **Install dependencies:**
+   ```sh
    pip install -r requirements.txt
    ```
 
-## Usage
-To run the application, execute the following command:
-```bash
-streamlit run src/main.py
+   **Required packages include:**
+   - streamlit
+   - opencv-python
+   - pytesseract
+   - pdf2image
+   - pandas
+   - fpdf
+   - spacy
+   - matplotlib
+   - google-generativeai
+
+3. **Download spaCy model:**
+   ```sh
+   python -m spacy download en_core_web_sm
+   ```
+
+4. **(Optional) Add your healthcare dataset:**
+   - Place a CSV file named `healthcare_dataset.csv` in the project root.
+   - Columns: `Test`, `Normal Range`, `Description`
+
+5. **Set up Google Gemini API key:**
+   - The API key is set in `app.py` as `GEMINI_API_KEY`. Replace with your own for production use.
+
+---
+
+## Running the App
+
+```sh
+streamlit run app.py
 ```
 
-## Contributing
-Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.
+Open the provided local URL in your browser to use the app.
+
+---
+
+## File Structure
+
+- `app.py` — Main Streamlit application.
+- `healthcare_dataset.csv` — (Optional) Dataset for test info and normal ranges.
+- `requirements.txt` — Python dependencies.
+
+---
+
+## Example Usage
+
+1. Upload a clear image of your medical report.
+2. Review extracted and structured data.
+3. Read AI-generated explanations for each test.
+4. Download a PDF summary or view data visualizations.
+
+---
+
+## Notes
+
+- All AI/NLP runs on the backend; no user API key input required.
+- For best results, use high-quality scans and a well-formatted healthcare dataset.
+- The app is for educational and informational purposes only. Always consult a healthcare professional for medical advice
+
+
+---
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details."# AI_HACKATHON_AI_Medical_Report_Analyzer_PY-193445" 
+
+This project is for Ai-hackathon purposes. 
+(ID: PY-193445) [MUHAMMAD SHAYAN AHMED] 
+[Python Programming]
+
+---
