@@ -21,7 +21,9 @@
 - **Data Visualization:** Visualizes test values and normal ranges with interactive charts.
 
 ---
+## 🎥 Demo Video
 
+👉 [Click here to watch the demo](Demo.mp4)
 ## How It Works
 
 1. **Upload** a medical report image (PNG/JPG).
