@@ -1,0 +1,11 @@
+streamlit
+numpy
+pandas
+scikit-learn
+nltk
+opencv-python
+pytesseract
+transformers
+torch
+tensorflow
+python==3.11.9
